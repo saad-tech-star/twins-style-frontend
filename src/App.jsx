@@ -33,13 +33,13 @@ const AppLayout = () => {
           <Route path="/checkout"    element={<Checkout />} />
 
           {/* Admin */}
-          <Route path="/Admin/Login" element={<AdminLogin />} />
-          <Route path="/Admin/Dashboard" element={
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/dashboard" element={
             <ProtectedRoute>
               <AdminDashboard />
             </ProtectedRoute>
           }/>
-          <Route path="/admin" element={<Navigate to="/Admin/Login" />} />
+          <Route path="/admin" element={<Navigate to="/admin/login" />} />
         </Routes>
       </main>
       {!isAdmin && <Footer />}

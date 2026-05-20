@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const API = 'http://localhost:5000/api/orders'
+const API = 'https://twins-style.vercel.app/api/orders'
 
 const FILTERS = ['tous', 'en attente', 'confirmé', 'livré']
 
