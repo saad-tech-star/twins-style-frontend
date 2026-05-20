@@ -14,7 +14,7 @@ export default function Contact() {
         <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', padding: '40px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <p style={{ fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.4)', marginBottom: '8px' }}>WhatsApp</p>
-            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '24px', color: '#1a1a1a' }}>+212 600 000 000</p>
+            <p style={{ fontFamily: 'Playfair Display, serif', fontSize: '24px', color: '#1a1a1a' }}>+212634698259"</p>
           </div>
           <a href="https://api.whatsapp.com/send/?phone=212634698259" target="_blank" rel="noreferrer" style={{
             display: 'inline-flex', alignItems: 'center', gap: '12px',
