@@ -7,7 +7,7 @@ import Shop from './pages/shop/shop'
 import Contact from './pages/contact/contact.jsx'
 import Cart from './pages/cart/cart'
 import Checkout from './pages/checkout/checkout.jsx'
-import AdminLogin from './pages/admin/adminlogin'
+import AdminLogin from './pages/admin/AdminLogin.jsx'
 import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 
 const ProtectedRoute = ({ children }) => {
@@ -33,13 +33,13 @@ const AppLayout = () => {
           <Route path="/checkout"    element={<Checkout />} />
 
           {/* Admin */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={
+          <Route path="/Admin/Login" element={<AdminLogin />} />
+          <Route path="/Admin/Dashboard" element={
             <ProtectedRoute>
               <AdminDashboard />
             </ProtectedRoute>
           }/>
-          <Route path="/admin" element={<Navigate to="/admin/login" />} />
+          <Route path="/admin" element={<Navigate to="/Admin/Login" />} />
         </Routes>
       </main>
       {!isAdmin && <Footer />}
