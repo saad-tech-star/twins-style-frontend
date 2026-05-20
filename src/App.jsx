@@ -8,7 +8,7 @@ import Contact from './pages/contact/contact.jsx'
 import Cart from './pages/cart/cart'
 import Checkout from './pages/checkout/checkout.jsx'
 import AdminLogin from './pages/admin/adminlogin'
-import AdminDashboard from './pages/admin/admindashboard'
+import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('admin_token')
