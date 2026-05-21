@@ -122,13 +122,13 @@ export default function AdminDashboard() {
     } catch (err) { console.error(err) }
   }
 
-  useEffect(() => {
+ useEffect(() => {
   const load = async () => {
     await fetchStats()
     await fetchOrders('tous')
     await fetchProducts()
   }
-  load()// eslint-disable-next-line react-hooks/exhaustive-deps
+  load() // eslint-disable-line react-hooks/exhaustive-deps
 }, [])
 
   const inputStyle = { width: '100%', padding: '8px 12px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '14px', marginBottom: '12px', boxSizing: 'border-box' }

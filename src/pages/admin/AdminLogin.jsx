@@ -12,7 +12,7 @@ export default function AdminLogin() {
     setError('')
     setLoading(true)
     try {
-      const res = await fetch('https://site-twins.vercel.app/api/admin/login', {
+      const res = await fetch('https://twins-style.vercel.app/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

@@ -63,7 +63,7 @@ export default function Checkout() {
           adresse: `${form.city} — ${form.address}`,
         }
 
-        const res = await fetch('https://site-twins.vercel.app/api/orders', {
+        const res = await fetch('https://twins-style.vercel.app/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
