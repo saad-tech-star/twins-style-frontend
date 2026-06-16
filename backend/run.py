@@ -15,15 +15,22 @@ load_dotenv()
 app = Flask(__name__)
 
 # ─── CONFIGURATION ────────────────────────────────────────────────────────────
-app.config['SQLALCHEMY_DATABASE_URI']    = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI']        = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['JWT_SECRET_KEY']             = os.getenv('JWT_SECRET_KEY')
+app.config['JWT_SECRET_KEY']                 = os.getenv('JWT_SECRET_KEY')
+
+# ─── ORIGINES AUTORISÉES ──────────────────────────────────────────────────────
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://twins-style.vercel.app",
+    "https://site-twins.vercel.app",
+]
 
 # ─── CORS ─────────────────────────────────────────────────────────────────────
 CORS(app,
     resources={
-        r"/api/*": {"origins": "http://localhost:5173"},
-        r"/products*": {"origins": "http://localhost:5173"}
+        r"/api/*":      {"origins": ALLOWED_ORIGINS},
+        r"/products*":  {"origins": ALLOWED_ORIGINS},
     },
     supports_credentials=True,
     allow_headers=["Content-Type", "Authorization"],
@@ -32,20 +39,22 @@ CORS(app,
 @app.before_request
 def handle_options():
     if request.method == "OPTIONS":
-        response = make_response()
-        response.headers["Access-Control-Allow-Origin"]      = "http://localhost:5173"
-        response.headers["Access-Control-Allow-Headers"]     = "Content-Type, Authorization"
-        response.headers["Access-Control-Allow-Methods"]     = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-        response.headers["Access-Control-Allow-Credentials"] = "true"
-        return response, 200
+        origin = request.headers.get("Origin", "")
+        if origin in ALLOWED_ORIGINS:
+            response = make_response()
+            response.headers["Access-Control-Allow-Origin"]      = origin
+            response.headers["Access-Control-Allow-Headers"]     = "Content-Type, Authorization"
+            response.headers["Access-Control-Allow-Methods"]     = "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            return response, 200
 
 # ─── EXTENSIONS ───────────────────────────────────────────────────────────────
 db.init_app(app)
 jwt = JWTManager(app)
 
 # ─── BLUEPRINTS ───────────────────────────────────────────────────────────────
-app.register_blueprint(admin_bp,  url_prefix='/api/admin')
-app.register_blueprint(orders_bp, url_prefix='/api/orders')
+app.register_blueprint(admin_bp,    url_prefix='/api/admin')
+app.register_blueprint(orders_bp,   url_prefix='/api/orders')
 app.register_blueprint(products_bp, url_prefix='/products')
 
 # ─── ROUTES PRODUITS ──────────────────────────────────────────────────────────
@@ -82,5 +91,3 @@ def get_produit_by_id(id):
 
 if __name__ == '__main__':
     app.run(debug=False, port=5000, use_reloader=False)
-
-    
